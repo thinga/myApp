@@ -38,6 +38,7 @@ namespace API
 
 
             services.AddControllers();
+            services.AddCors();
            
         }
 
@@ -53,6 +54,7 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseAuthorization();
 
