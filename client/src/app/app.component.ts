@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Dryed Tropical Fruits';
+  title = 'Shopping App';
   users: any;
 
   constructor(private http: HttpClient){}
