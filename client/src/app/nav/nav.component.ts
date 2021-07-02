@@ -23,6 +23,8 @@ loggedIn: boolean;
     })
   }
 
-
+  logout(){
+    	    this.loggedIn = false;
+    	  }
 
 }
