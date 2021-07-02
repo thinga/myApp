@@ -2,6 +2,7 @@
 using System.Text;
 
 using API.Data;
+using API.Extensions;
 using API.Interfaces;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -37,7 +38,7 @@ namespace API
            });
 
 
-
+            services.AddIdentityServices(_config);
             services.AddControllers();
             services.AddCors();
             services.AddScoped<ITokenService, TokenService>();
