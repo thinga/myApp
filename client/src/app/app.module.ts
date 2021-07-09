@@ -12,6 +12,10 @@ import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';  
 import { RegisterComponent } from './register/register.component';
 import { CommonModule } from '@angular/common';
+import { MembersListComponent } from './members-list/members-list.component';
+import { MemberDetailComponent } from './member-detail/member-detail.component';
+import { ListsComponent } from './lists/lists.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   exports: [CommonModule],
@@ -19,7 +23,11 @@ import { CommonModule } from '@angular/common';
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    MembersListComponent,
+    MemberDetailComponent,
+    ListsComponent,
+    MessagesComponent
   ],
   imports: [
     CommonModule,
