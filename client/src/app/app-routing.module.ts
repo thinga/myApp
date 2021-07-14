@@ -6,6 +6,7 @@ import { ListsComponent } from './lists/lists.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MembersListComponent } from './members/members-list/members-list.component';
 import { MessagesComponent } from './messages/messages.component';
+import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
       
     ]
   },
+  {path: 'errors', component: TestErrorsComponent},
   {path: '**', component: HomeComponent, pathMatch: 'full'},
 ];
 
