@@ -50,7 +50,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                 break;
         
           }
-
         }
         return throwError(error);
       })
