@@ -24,7 +24,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     BsDropdownModule,
     ToastrModule,
     TabsModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule
   ]
 })
 
