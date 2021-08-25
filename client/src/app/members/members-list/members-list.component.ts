@@ -28,4 +28,10 @@ loadMembers() {
     this.pagination = response.pagination;
   })
 }
+// for Setting up client pagination. in the HTML auch.
+pageChanged(event: any) {
+  this.pageNumber = event.page;
+  this.loadMembers();
+}
+
 }
