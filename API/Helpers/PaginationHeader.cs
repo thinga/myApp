@@ -2,8 +2,6 @@ namespace API.Helpers
 {
     public class PaginationHeader
     {
-     
-
         public PaginationHeader(int currentPage, int itemsPerPage, int totalItems, int totalPages)
         {
             this.CurrentPage = currentPage;
