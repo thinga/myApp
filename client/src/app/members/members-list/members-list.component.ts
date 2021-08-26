@@ -19,6 +19,7 @@ export class MembersListComponent implements OnInit {
  pagination: Pagination;
 userParams: UserParams;
 user: User;
+genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}]
 
 constructor(private memberService: MembersService, private accountService: AccountService) {
   this.accountService.currentUsers$.pipe(take(1)).subscribe(user => {
@@ -38,6 +39,12 @@ loadMembers() {
     this.pagination = response.pagination;
   })
 }
+
+resetFilters() {
+  this.userParams = new UserParams(this.user);
+  this.loadMembers();
+}
+
 // for Setting up client pagination. in the HTML auch.
 pageChanged(event: any) {
       this.userParams.pageNumber  = event.page;
