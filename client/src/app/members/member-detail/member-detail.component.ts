@@ -24,11 +24,13 @@ export class MemberDetailComponent implements OnInit {
   constructor(private memberService: MembersService, private route: ActivatedRoute, private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.loadMember();
+    this.route.data.subscribe(data => {
+      this.member = data.member;
+    });
 
     this.route.queryParams.subscribe(params => {
       params.tab ? this.selectTab(params.tab) : this.selectTab(0);
-    })
+    });
 
     this.galleryOptions = [
       {
@@ -41,7 +43,7 @@ export class MemberDetailComponent implements OnInit {
 
       }
     ]
-   
+    this.galleryImages = this.getImages();
 
   }
 
@@ -55,13 +57,6 @@ export class MemberDetailComponent implements OnInit {
       })
     }
     return imageUrls;
-  }
-
-  loadMember() {
-    this.memberService.getMember(this.route.snapshot.paramMap.get('username')).subscribe(member => {
-      this.member = member;
-      this.galleryImages = this.getImages();
-    });
   }
 
   loadMessages() {
