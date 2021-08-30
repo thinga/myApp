@@ -29,7 +29,7 @@ pageSize = 5;
       } )
   }
 
-  pageChange(event: any) {
+  pageChanged(event: any) {
     this.pageNumber = event.page;
     this.loadMessages();
   }
