@@ -10,9 +10,8 @@ import { AccountService } from '../_services/account.service';
 })
 export class AdminGuard implements CanActivate {
   constructor(private accountService: AccountService, private toastr: ToastrService ) {}
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean {
+  canActivate(): Observable<boolean> {
+
     return this.accountService.currentUsers$.pipe(
       map(user => {
         if (user.roles.includes('Admin') || user.roles.includes('Moderator')) {
@@ -22,5 +21,6 @@ export class AdminGuard implements CanActivate {
       })
     )
   }
+
   
 }
