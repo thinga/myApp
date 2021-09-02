@@ -22,7 +22,7 @@ namespace API.Extensions
 				services.AddScoped<LogUserActivity>();
 				services.AddScoped<ILikesRepository, LikesRepository>();
 				services.AddScoped<IMessageRepository, MessageRepository>();
-				services.AddSingleton<presenceTracker>();
+				services.AddSingleton<PresenceTracker>();
 
 				services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 	            services.AddDbContext<DataContext>(options =>
