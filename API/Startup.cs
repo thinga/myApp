@@ -6,6 +6,7 @@ using API.Extensions;
 using API.Interfaces;
 using API.Middleware;
 using API.Services;
+using API.SignaIR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +37,7 @@ namespace API
             services.AddIdentityServices(_config);
             services.AddControllers();
             services.AddCors();
+            services.AddSignalR();
         
           
 
@@ -57,6 +59,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
             });
         }
     }
