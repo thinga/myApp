@@ -7,7 +7,7 @@ namespace API.SignaIR
 {
     public class PresenceHub : Hub
     {
-                public override async Task OnConnectedAsync()
+            public override async Task OnConnectedAsync()
         {
             await Clients.Others.SendAsync("UserIsOnline", Context.User.GetUsername());
         }
@@ -18,5 +18,5 @@ namespace API.SignaIR
             await base.OnDisconnectedAsync(exception);
         }
 
-    }
+    }P
 }
