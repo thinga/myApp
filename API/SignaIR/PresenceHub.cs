@@ -18,5 +18,5 @@ namespace API.SignaIR
             await base.OnDisconnectedAsync(exception);
         }
 
-    }P
+    }
 }
