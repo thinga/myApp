@@ -37,11 +37,8 @@ namespace API.Extensions
                       ValidateAudience = false,
 
                   };
-
-                  
                          options.Events = new JwtBearerEvents
                          {
-
                              OnMessageReceived = context => 
                              {
                                  var accessToken = context.Request.Query["access_token"];

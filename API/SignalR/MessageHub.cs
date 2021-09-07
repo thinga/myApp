@@ -7,7 +7,7 @@ using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 
-namespace API.SignaIR
+namespace API.SignalR
 {
     public class MessageHub : Hub
     {

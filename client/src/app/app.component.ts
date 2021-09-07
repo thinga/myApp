@@ -10,7 +10,7 @@ import { PresenceService } from './_services/presence.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Shopping App';
+  title = 'Dating App';
   users: any;
 
   constructor(private accountService: AccountService, private presence: PresenceService){}
@@ -20,8 +20,12 @@ export class AppComponent implements OnInit {
   }
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
-    this.accountService.setCurrentUser(user);
-    this.presence.createHubConnection(user);
+    if (user) {
+      this.accountService.setCurrentUser(user);
+      this.presence.createHubConnection(user);
+
+    }
+   
   }
  
   }

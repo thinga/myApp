@@ -14,8 +14,8 @@ export class MessageService {
   baseUrl = environment.apiUrl;
   hubUrl = environment.hubUrl;
   private hubConnection: HubConnection;
-  private messagesThreadSource = new BehaviorSubject<Message[]>([]);
-  messageThread$ = this.messagesThreadSource.asObservable();
+  private messageThreadSource = new BehaviorSubject<Message[]>([]);
+  messageThread$ = this.messageThreadSource.asObservable();
 
 
   constructor(private http: HttpClient) { }
@@ -28,16 +28,19 @@ export class MessageService {
          .withAutomaticReconnect()
          .build()
 
-         this.hubConnection.start().catch(error => console.error(error));
+         this.hubConnection.start().catch(error => console.log(error));
 
          this.hubConnection.on('ReceiveMessageThread', messages => {
-           this.messagesThreadSource.next(messages);
+           this.messageThreadSource.next(messages);
          })
          
   }
 
   stopHubConnection(){
-    this.hubConnection.stop();
+    if (this.hubConnection){
+      this.hubConnection.stop();
+    }
+    
   }
 
 
