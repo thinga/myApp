@@ -1,22 +1,17 @@
 
-using System.Text;
-
-using API.Data;
 using API.Extensions;
-using API.Interfaces;
+
 using API.Middleware;
-using API.Services;
+
 using API.SignaIR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
-using Microsoft.EntityFrameworkCore;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
-using Microsoft.IdentityModel.Tokens;
 
 namespace API
 {
@@ -59,10 +54,8 @@ namespace API
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<PresenceHub>("hubs/presence");
-
-
-                
-                
+                endpoints.MapHub<MessageHub>("hubs/message");
+                       
             });
         }
     }
