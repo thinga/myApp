@@ -30,7 +30,6 @@ namespace API.SignaIR
             await Clients.Others.SendAsync("UserIsOffline", Context.User.GetUsername());
             await base.OnDisconnectedAsync(exception);
 
-            await base.OnDisconnectedAsync(exception);
         }
 
     }
