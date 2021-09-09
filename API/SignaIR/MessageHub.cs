@@ -15,9 +15,15 @@ namespace API.SignaIR
         private readonly IMapper _mapper;
         private readonly IMessageRepository _messageRepository;
         private readonly IUserRepository _userRepository;
-        public MessageHub(IMessageRepository messageRepository, IMapper mapper,
-                          IUserRepository userRepository)
+        private readonly IHubContext<PresenceHub> _presenceHub;
+        private readonly PresenceTracker _tracker;
+
+        public MessageHub(IMessageRepository messageRepository, IMapper mapper, 
+                          IUserRepository userRepository, IHubContext<PresenceHub> presenceHub,
+                          PresenceTracker tracker)
         {
+            _presenceHub = presenceHub;
+            _tracker = tracker;
             _userRepository = userRepository;
             _messageRepository = messageRepository;
             _mapper = mapper;
@@ -65,21 +71,32 @@ namespace API.SignaIR
         };
 
         var groupName = GetGroupName(sender.UserName, recipient.UserName);
+
         var group = await _messageRepository.GetMessageGroup(groupName);
+
         if (group.Connections.Any(x => x.Username == recipient.UserName))
         {
             message.DateRead = DateTime.UtcNow;
+        }
+        else 
+        {
+            var connections = await _tracker.GetConnectionsForUser(recipient.UserName);
+            if (connections != null)
+            {
+                await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived", 
+                       new {username = sender.UserName, knownAs = sender.KnownAs});
+            }
         }
 
         _messageRepository.AddMessage(message);
 
         if (await _messageRepository.SaveAllAsync())
         {
-            
-           await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
+
+            await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
 
         }
-         
+
     }
 
     private async Task<bool> AddToGroup(HubCallerContext context, string groupName)
