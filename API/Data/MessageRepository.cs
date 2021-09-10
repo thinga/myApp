@@ -82,6 +82,7 @@ namespace API.Data
 
             };
 
+
             return await PagedList<MessageDto>.CreateAsync(query, messageParams.PageNumber, messageParams.PageSize);
 
 
@@ -90,8 +91,7 @@ namespace API.Data
         public async Task<IEnumerable<MessageDto>> GetMessageThread (string currentUsername, string recipientUsername)
                 {
                        var messages = await _context.Messages
-                         .Include(u => u.Sender).ThenInclude(p => p.Photos)
-                         .Include(u => u.Recipient).ThenInclude(p => p.Photos)
+                         
                          .Where(m => m.Recipient.UserName == currentUsername && m.RecipientDeleted == false
                          && m.Sender.UserName == recipientUsername
                          || m.Recipient.UserName == recipientUsername
@@ -100,10 +100,11 @@ namespace API.Data
                            )
                
                         .OrderBy(m => m.MessageSent)
+                        .ProjectTo<MessageDto>(_mapper.ConfigurationProvider)
                         .ToListAsync();
 
              var unreadMessages = messages.Where(m => m.DateRead == null
-              && m.Recipient.UserName == currentUsername).ToList();  
+              && m.RecipientUsername == currentUsername).ToList();  
 
               if (unreadMessages.Any())
               {
@@ -115,7 +116,7 @@ namespace API.Data
                  
               } 
               
-              return _mapper.Map<IEnumerable<MessageDto>>(messages);
+              return messages;
         }
 
         public void RemoveConnection(Connection connection)
